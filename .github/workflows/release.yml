@@ -1,0 +1,225 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: SemVer component to bump (ignored when custom_version is provided)
+        type: choice
+        required: true
+        default: patch
+        options:
+          - patch
+          - minor
+          - major
+      custom_version:
+        description: Explicit version override (e.g. 1.2.0)
+        type: string
+        required: false
+        default: ""
+      dry_run:
+        description: Preview version bump without committing, tagging, or creating a release
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Bump version, tag, and publish release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure release runs from main
+        if: github.ref != 'refs/heads/main'
+        run: |
+          echo "::error::Releases must be triggered from the main branch (got ${GITHUB_REF})."
+          exit 1
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compute and apply version bump
+        id: version
+        env:
+          BUMP: ${{ inputs.bump }}
+          CUSTOM_VERSION: ${{ inputs.custom_version }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          PBXPROJ: cleandial.xcodeproj/project.pbxproj
+          TARGET_NAME: cleandial
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          pbxproj_path = Path(os.environ["PBXPROJ"])
+          target_name = os.environ["TARGET_NAME"]
+          bump = os.environ["BUMP"].strip()
+          custom_version = os.environ["CUSTOM_VERSION"].strip().lstrip("v")
+          dry_run = os.environ["DRY_RUN"].lower() == "true"
+
+          text = pbxproj_path.read_text(encoding="utf-8")
+
+          # 1. Find the native target's buildConfigurationList UUID.
+          target_re = re.compile(
+              r"[A-F0-9]{24}\s*/\*\s*" + re.escape(target_name) + r"\s*\*/\s*=\s*\{[^}]*?"
+              r"isa = PBXNativeTarget;[^}]*?"
+              r"buildConfigurationList = ([A-F0-9]{24})\b",
+              re.DOTALL,
+          )
+          target_match = target_re.search(text)
+          if not target_match:
+              sys.exit(f"Could not find PBXNativeTarget '{target_name}' in {pbxproj_path}")
+          config_list_id = target_match.group(1)
+
+          # 2. Extract the build configuration UUIDs (Debug, Release, etc.) for that target.
+          list_re = re.compile(
+              re.escape(config_list_id) + r"\b[^=]*=\s*\{[^}]*?buildConfigurations = \(([^)]*)\);",
+              re.DOTALL,
+          )
+          list_match = list_re.search(text)
+          if not list_match:
+              sys.exit(f"Could not find XCConfigurationList {config_list_id}")
+          config_ids = re.findall(r"\b([A-F0-9]{24})\b", list_match.group(1))
+          if not config_ids:
+              sys.exit(f"No buildConfigurations found in {config_list_id}")
+
+          # 3. Read current MARKETING_VERSION from each of the app target's build configs.
+          def block_pattern(cfg_id: str) -> re.Pattern:
+              return re.compile(
+                  r"(" + re.escape(cfg_id) + r"\b[^=]*=\s*\{\s*isa = XCBuildConfiguration;.*?"
+                  r"MARKETING_VERSION = )([0-9]+\.[0-9]+\.[0-9]+)(;)",
+                  re.DOTALL,
+              )
+
+          versions = []
+          for cfg_id in config_ids:
+              m = block_pattern(cfg_id).search(text)
+              if not m:
+                  sys.exit(f"Could not find MARKETING_VERSION in build config {cfg_id}")
+              versions.append(m.group(2))
+
+          if len(set(versions)) != 1:
+              sys.exit(f"Mismatched MARKETING_VERSION across target configs: {versions}")
+          current_version = versions[0]
+
+          # 4. Compute and validate the next SemVer version.
+          semver_re = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
+          cur_m = semver_re.match(current_version)
+          if not cur_m:
+              sys.exit(f"Current MARKETING_VERSION '{current_version}' is not X.Y.Z")
+          major, minor, patch = map(int, cur_m.groups())
+
+          if custom_version:
+              if not semver_re.match(custom_version):
+                  sys.exit(f"custom_version '{custom_version}' must match X.Y.Z (e.g. 1.2.0)")
+              new_version = custom_version
+          elif bump == "major":
+              new_version = f"{major + 1}.0.0"
+          elif bump == "minor":
+              new_version = f"{major}.{minor + 1}.0"
+          elif bump == "patch":
+              new_version = f"{major}.{minor}.{patch + 1}"
+          else:
+              sys.exit(f"Unsupported bump type: {bump}")
+
+          if tuple(map(int, new_version.split("."))) <= (major, minor, patch):
+              sys.exit(
+                  f"New version ({new_version}) must be strictly greater than "
+                  f"current version ({current_version})."
+              )
+
+          tag = f"v{new_version}"
+          existing = subprocess.run(
+              ["git", "rev-parse", "-q", "--verify", f"refs/tags/{tag}"],
+              capture_output=True,
+              text=True,
+          )
+          if existing.returncode == 0:
+              sys.exit(f"Tag '{tag}' already exists.")
+
+          # 5. Update MARKETING_VERSION strictly within the app target's build configs.
+          updated = text
+          for cfg_id in config_ids:
+              updated, count = block_pattern(cfg_id).subn(
+                  lambda m: f"{m.group(1)}{new_version}{m.group(3)}",
+                  updated,
+                  count=1,
+              )
+              if count != 1:
+                  sys.exit(f"Expected 1 replacement for config {cfg_id}, got {count}")
+
+          if not dry_run:
+              pbxproj_path.write_text(updated, encoding="utf-8")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"old_version={current_version}\n")
+              out.write(f"new_version={new_version}\n")
+              out.write(f"tag={tag}\n")
+
+          print(f"Version bump: {current_version} -> {new_version} (tag: {tag}, dry_run: {dry_run})")
+          PY
+
+      - name: Commit, tag, and push
+        if: ${{ !inputs.dry_run }}
+        id: push
+        env:
+          NEW_VERSION: ${{ steps.version.outputs.new_version }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add cleandial.xcodeproj/project.pbxproj
+          git commit -m "chore(release): ${TAG}"
+          git tag -a "${TAG}" -m "Release ${TAG}"
+
+          git push origin HEAD:main
+          git push origin "${TAG}"
+
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          gh release create "${TAG}" \
+            --title "${TAG}" \
+            --generate-notes
+
+      - name: Write job summary
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
+          OLD_VERSION: ${{ steps.version.outputs.old_version }}
+          NEW_VERSION: ${{ steps.version.outputs.new_version }}
+          TAG: ${{ steps.version.outputs.tag }}
+          SHA: ${{ steps.push.outputs.sha }}
+        run: |
+          {
+            if [ "${DRY_RUN}" = "true" ]; then
+              echo "### Dry Run — Release Preview"
+            else
+              echo "### Released ${TAG}"
+            fi
+            echo ""
+            echo "| Field | Value |"
+            echo "|---|---|"
+            echo "| Previous Version | \`${OLD_VERSION}\` |"
+            echo "| New Version | \`${NEW_VERSION}\` |"
+            echo "| Git Tag | \`${TAG}\` |"
+            if [ -n "${SHA}" ]; then
+              echo "| Commit | \`${SHA}\` |"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
