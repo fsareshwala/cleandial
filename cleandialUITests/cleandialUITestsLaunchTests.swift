@@ -1,6 +1,6 @@
 import XCTest
 
-final class contactformatterUITestsLaunchTests: XCTestCase {
+final class cleandialUITestsLaunchTests: XCTestCase {
 
   override class var runsForEachTargetApplicationUIConfiguration: Bool {
     true

@@ -4,7 +4,7 @@ import Foundation
 import PhoneNumberKit
 import Testing
 
-@testable import contactformatter
+@testable import cleandial
 
 // MARK: - Test Helpers
 

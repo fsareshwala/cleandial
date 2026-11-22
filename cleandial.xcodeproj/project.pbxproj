@@ -22,51 +22,51 @@
 			containerPortal = BBE9833A2DB7FA43004685CF /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = BBE983412DB7FA43004685CF;
-			remoteInfo = contactformatter;
+			remoteInfo = cleandial;
 		};
 		BBE9835D2DB7FA44004685CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BBE9833A2DB7FA43004685CF /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = BBE983412DB7FA43004685CF;
-			remoteInfo = contactformatter;
+			remoteInfo = cleandial;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		BBAB2B462DF767A300D5E1F8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		BBE983422DB7FA43004685CF /* contactformatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = contactformatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BBE983522DB7FA44004685CF /* contactformatterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = contactformatterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BBE9835C2DB7FA44004685CF /* contactformatterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = contactformatterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBE983422DB7FA43004685CF /* cleandial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cleandial.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBE983522DB7FA44004685CF /* cleandialTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cleandialTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBE9835C2DB7FA44004685CF /* cleandialUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cleandialUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		BB99240F2DEA6D68002B7BCF /* Exceptions for "contactformatter" folder in "contactformatter" target */ = {
+		BB99240F2DEA6D68002B7BCF /* Exceptions for "cleandial" folder in "cleandial" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = BBE983412DB7FA43004685CF /* contactformatter */;
+			target = BBE983412DB7FA43004685CF /* cleandial */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		BBE983442DB7FA43004685CF /* contactformatter */ = {
+		BBE983442DB7FA43004685CF /* cleandial */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				BB99240F2DEA6D68002B7BCF /* Exceptions for "contactformatter" folder in "contactformatter" target */,
+				BB99240F2DEA6D68002B7BCF /* Exceptions for "cleandial" folder in "cleandial" target */,
 			);
-			path = contactformatter;
+			path = cleandial;
 			sourceTree = "<group>";
 		};
-		BBE983552DB7FA44004685CF /* contactformatterTests */ = {
+		BBE983552DB7FA44004685CF /* cleandialTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = contactformatterTests;
+			path = cleandialTests;
 			sourceTree = "<group>";
 		};
-		BBE9835F2DB7FA44004685CF /* contactformatterUITests */ = {
+		BBE9835F2DB7FA44004685CF /* cleandialUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = contactformatterUITests;
+			path = cleandialUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -110,9 +110,9 @@
 		BBE983392DB7FA43004685CF = {
 			isa = PBXGroup;
 			children = (
-				BBE983442DB7FA43004685CF /* contactformatter */,
-				BBE983552DB7FA44004685CF /* contactformatterTests */,
-				BBE9835F2DB7FA44004685CF /* contactformatterUITests */,
+				BBE983442DB7FA43004685CF /* cleandial */,
+				BBE983552DB7FA44004685CF /* cleandialTests */,
+				BBE9835F2DB7FA44004685CF /* cleandialUITests */,
 				BBE983432DB7FA43004685CF /* Products */,
 				BBAB2B462DF767A300D5E1F8 /* GoogleService-Info.plist */,
 				BB86A1F92EBDBE5300AC6458 /* Frameworks */,
@@ -122,9 +122,9 @@
 		BBE983432DB7FA43004685CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BBE983422DB7FA43004685CF /* contactformatter.app */,
-				BBE983522DB7FA44004685CF /* contactformatterTests.xctest */,
-				BBE9835C2DB7FA44004685CF /* contactformatterUITests.xctest */,
+				BBE983422DB7FA43004685CF /* cleandial.app */,
+				BBE983522DB7FA44004685CF /* cleandialTests.xctest */,
+				BBE9835C2DB7FA44004685CF /* cleandialUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,9 +132,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BBE983412DB7FA43004685CF /* contactformatter */ = {
+		BBE983412DB7FA43004685CF /* cleandial */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BBE983662DB7FA44004685CF /* Build configuration list for PBXNativeTarget "contactformatter" */;
+			buildConfigurationList = BBE983662DB7FA44004685CF /* Build configuration list for PBXNativeTarget "cleandial" */;
 			buildPhases = (
 				BBE9833E2DB7FA43004685CF /* Sources */,
 				BBE9833F2DB7FA43004685CF /* Frameworks */,
@@ -146,22 +146,22 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				BBE983442DB7FA43004685CF /* contactformatter */,
+				BBE983442DB7FA43004685CF /* cleandial */,
 			);
-			name = contactformatter;
+			name = cleandial;
 			packageProductDependencies = (
 				BBC3992A2DD151670005BDD5 /* PhoneNumberKit-Static */,
 				BB9924652DEACA8C002B7BCF /* PhoneNumberKit-Static */,
 				BBAB2B4B2DF7685400D5E1F8 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				BB86A1FA2EBDBE5300AC6458 /* FirebaseCrashlytics */,
 			);
-			productName = contactformatter;
-			productReference = BBE983422DB7FA43004685CF /* contactformatter.app */;
+			productName = cleandial;
+			productReference = BBE983422DB7FA43004685CF /* cleandial.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BBE983512DB7FA44004685CF /* contactformatterTests */ = {
+		BBE983512DB7FA44004685CF /* cleandialTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BBE983692DB7FA44004685CF /* Build configuration list for PBXNativeTarget "contactformatterTests" */;
+			buildConfigurationList = BBE983692DB7FA44004685CF /* Build configuration list for PBXNativeTarget "cleandialTests" */;
 			buildPhases = (
 				BBE9834E2DB7FA44004685CF /* Sources */,
 				BBE9834F2DB7FA44004685CF /* Frameworks */,
@@ -173,18 +173,18 @@
 				BBE983542DB7FA44004685CF /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				BBE983552DB7FA44004685CF /* contactformatterTests */,
+				BBE983552DB7FA44004685CF /* cleandialTests */,
 			);
-			name = contactformatterTests;
+			name = cleandialTests;
 			packageProductDependencies = (
 			);
-			productName = contactformatterTests;
-			productReference = BBE983522DB7FA44004685CF /* contactformatterTests.xctest */;
+			productName = cleandialTests;
+			productReference = BBE983522DB7FA44004685CF /* cleandialTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		BBE9835B2DB7FA44004685CF /* contactformatterUITests */ = {
+		BBE9835B2DB7FA44004685CF /* cleandialUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BBE9836C2DB7FA44004685CF /* Build configuration list for PBXNativeTarget "contactformatterUITests" */;
+			buildConfigurationList = BBE9836C2DB7FA44004685CF /* Build configuration list for PBXNativeTarget "cleandialUITests" */;
 			buildPhases = (
 				BBE983582DB7FA44004685CF /* Sources */,
 				BBE983592DB7FA44004685CF /* Frameworks */,
@@ -196,13 +196,13 @@
 				BBE9835E2DB7FA44004685CF /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				BBE9835F2DB7FA44004685CF /* contactformatterUITests */,
+				BBE9835F2DB7FA44004685CF /* cleandialUITests */,
 			);
-			name = contactformatterUITests;
+			name = cleandialUITests;
 			packageProductDependencies = (
 			);
-			productName = contactformatterUITests;
-			productReference = BBE9835C2DB7FA44004685CF /* contactformatterUITests.xctest */;
+			productName = cleandialUITests;
+			productReference = BBE9835C2DB7FA44004685CF /* cleandialUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -228,7 +228,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BBE9833D2DB7FA43004685CF /* Build configuration list for PBXProject "contactformatter" */;
+			buildConfigurationList = BBE9833D2DB7FA43004685CF /* Build configuration list for PBXProject "cleandial" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -246,9 +246,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BBE983412DB7FA43004685CF /* contactformatter */,
-				BBE983512DB7FA44004685CF /* contactformatterTests */,
-				BBE9835B2DB7FA44004685CF /* contactformatterUITests */,
+				BBE983412DB7FA43004685CF /* cleandial */,
+				BBE983512DB7FA44004685CF /* cleandialTests */,
+				BBE9835B2DB7FA44004685CF /* cleandialUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -334,12 +334,12 @@
 /* Begin PBXTargetDependency section */
 		BBE983542DB7FA44004685CF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BBE983412DB7FA43004685CF /* contactformatter */;
+			target = BBE983412DB7FA43004685CF /* cleandial */;
 			targetProxy = BBE983532DB7FA44004685CF /* PBXContainerItemProxy */;
 		};
 		BBE9835E2DB7FA44004685CF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BBE983412DB7FA43004685CF /* contactformatter */;
+			target = BBE983412DB7FA43004685CF /* cleandial */;
 			targetProxy = BBE9835D2DB7FA44004685CF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -479,7 +479,7 @@
 				DEVELOPMENT_TEAM = F6W6TR89TJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = contactformatter/Info.plist;
+				INFOPLIST_FILE = cleandial/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Clean Dial";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -517,7 +517,7 @@
 				DEVELOPMENT_TEAM = F6W6TR89TJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = contactformatter/Info.plist;
+				INFOPLIST_FILE = cleandial/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Clean Dial";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -559,7 +559,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/contactformatter.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/contactformatter";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cleandial.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/cleandial";
 			};
 			name = Debug;
 		};
@@ -577,7 +577,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/contactformatter.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/contactformatter";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cleandial.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/cleandial";
 			};
 			name = Release;
 		};
@@ -593,7 +593,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = contactformatter;
+				TEST_TARGET_NAME = cleandial;
 			};
 			name = Debug;
 		};
@@ -609,14 +609,14 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = contactformatter;
+				TEST_TARGET_NAME = cleandial;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BBE9833D2DB7FA43004685CF /* Build configuration list for PBXProject "contactformatter" */ = {
+		BBE9833D2DB7FA43004685CF /* Build configuration list for PBXProject "cleandial" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BBE983642DB7FA44004685CF /* Debug */,
@@ -625,7 +625,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BBE983662DB7FA44004685CF /* Build configuration list for PBXNativeTarget "contactformatter" */ = {
+		BBE983662DB7FA44004685CF /* Build configuration list for PBXNativeTarget "cleandial" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BBE983672DB7FA44004685CF /* Debug */,
@@ -634,7 +634,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BBE983692DB7FA44004685CF /* Build configuration list for PBXNativeTarget "contactformatterTests" */ = {
+		BBE983692DB7FA44004685CF /* Build configuration list for PBXNativeTarget "cleandialTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BBE9836A2DB7FA44004685CF /* Debug */,
@@ -643,7 +643,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BBE9836C2DB7FA44004685CF /* Build configuration list for PBXNativeTarget "contactformatterUITests" */ = {
+		BBE9836C2DB7FA44004685CF /* Build configuration list for PBXNativeTarget "cleandialUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BBE9836D2DB7FA44004685CF /* Debug */,
