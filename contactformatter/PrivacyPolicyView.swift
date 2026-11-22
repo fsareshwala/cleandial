@@ -1,11 +1,7 @@
-import FirebaseAnalytics
 import SwiftUI
 
 struct PrivacyPolicyView: View {
-  var body: some View {
-    ScrollView {
-      Text(
-        """
+    static let policyText = """
         **Effective Date:** June 11, 2025
 
         Your privacy is our priority. This app is designed to format contact information locally on your device. Your presonal contact data is never collected, stored, or shared.
@@ -14,7 +10,7 @@ struct PrivacyPolicyView: View {
         All contact formatting is performed entirely on your device. None of your contacts, phone numbers, or address book details are ever uploaded to a server, stored, or shared with third parties.
 
         **2. Open Source**
-        To ensure total transparency, this app is open source. Users can review its source code to verify the privacy claims and see exactly how your data is handled. You can find the source code at: https://github.com/fsareshwala/contactformatter.
+        To ensure total transparency, this app is open source. Users can review its source code to verify the privacy claims and see exactly how your data is handled. You can find the source code at: \(AppLinks.githubURLString).
 
         **3. Information Collected**
         To help improve the app’s performance and stability, two types of anonymous data are collected:
@@ -35,13 +31,16 @@ struct PrivacyPolicyView: View {
         **6. Changes to This Policy**
         This policy may be updated from time to time. Any changes will be reflected by the "Effective Date" at the top of this page.
         """
-      )
-      .padding()
+
+    var body: some View {
+        ScrollView {
+            Text(LocalizedStringKey(Self.policyText))
+                .padding()
+        }
+        .navigationTitle("Privacy Policy")
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            FirebaseAnalyticsLogger.shared.log(.viewPrivacyPolicy)
+        }
     }
-    .navigationTitle("Privacy Policy")
-    .navigationBarTitleDisplayMode(.inline)
-    .onAppear {
-      Analytics.logEvent("view_privacy_policy", parameters: nil)
-    }
-  }
 }
