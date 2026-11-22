@@ -1,89 +1,89 @@
 import Contacts
-import FirebaseAnalytics
 import SwiftUI
 
 struct FeatureView: View {
-  let imageName: String
-  let title: String
-  let subtitle: String
+    let imageName: String
+    let title: String
+    let subtitle: String
 
-  var body: some View {
-    HStack {
-      Image(systemName: imageName)
-        .resizable()
-        .foregroundStyle(.tint)
-        .scaledToFit()
-        .frame(width: 35, height: 35)
-        .padding(.trailing)
+    var body: some View {
+        HStack {
+            Image(systemName: imageName)
+                .resizable()
+                .foregroundStyle(.tint)
+                .scaledToFit()
+                .frame(width: 35, height: 35)
+                .padding(.trailing)
 
-      VStack(alignment: .leading) {
-        Text(title)
-          .font(.headline)
-          .foregroundColor(.primary)
+            VStack(alignment: .leading) {
+                Text(title)
+                    .font(.headline)
+                    .foregroundStyle(.primary)
 
-        Text(subtitle)
-          .font(.callout)
-          .foregroundColor(.secondary)
-      }
+                Text(subtitle)
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+            }
+        }
     }
-  }
 }
 
 struct LandingView: View {
-  @Binding var authorizationStatus: CNAuthorizationStatus
+    @Binding var authorizationStatus: CNAuthorizationStatus
 
-  var body: some View {
-    VStack {
-      Spacer()
+    var body: some View {
+        VStack {
+            Spacer()
 
-      LogoHeaderView()
-      VStack(alignment: .leading, spacing: 25) {
-        FeatureView(
-          imageName: "person.text.rectangle",
-          title: "Format contact phone numbers",
-          subtitle: "Choose from standard formats"
-        )
+            LogoHeaderView()
+            VStack(alignment: .leading, spacing: 25) {
+                FeatureView(
+                    imageName: "person.text.rectangle",
+                    title: "Format contact phone numbers",
+                    subtitle: "Choose from standard formats"
+                )
 
-        FeatureView(
-          imageName: "switch.2",
-          title: "Easily switch between formats",
-          subtitle: "Choose from standard formats"
-        )
+                FeatureView(
+                    imageName: "switch.2",
+                    title: "Easily switch between formats",
+                    subtitle: "Choose from standard formats"
+                )
 
-        FeatureView(
-          imageName: "hand.raised.app",
-          title: "Privacy focused",
-          subtitle: "Your contacts never leave your device"
-        )
-      }
-      .padding()
+                FeatureView(
+                    imageName: "hand.raised.app",
+                    title: "Privacy focused",
+                    subtitle: "Your contacts never leave your device"
+                )
+            }
+            .padding()
 
-      Spacer()
-      Text("Please tap the button below to grant Clean Dial access to your contacts")
-        .font(.callout)
-        .padding()
-        .multilineTextAlignment(.center)
-        .frame(maxWidth: .infinity, alignment: .center)
+            Spacer()
+            Text("Please tap the button below to grant Clean Dial access to your contacts")
+                .font(.callout)
+                .padding()
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
 
-      Button(action: { requestAuthorization() }) {
-        Text("Continue")
-          .font(.headline)
-          .frame(maxWidth: .infinity)
-      }
-      .buttonStyle(.borderedProminent)
-      .controlSize(.large)
-      .padding()
+            Button(action: { requestAuthorization() }) {
+                Text("Continue")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .padding()
+        }
     }
-  }
 
-  private func requestAuthorization() {
-    Analytics.logEvent("request_authorization", parameters: nil)
-    CNContactStore().requestAccess(for: .contacts) { granted, error in
-      authorizationStatus = CNContactStore.authorizationStatus(for: .contacts)
+    private func requestAuthorization() {
+        FirebaseAnalyticsLogger.shared.log(.requestAuthorization)
+        Task {
+            _ = try? await ContactStoreService.shared.requestAccess()
+            authorizationStatus = ContactStoreService.shared.authorizationStatus()
+        }
     }
-  }
 }
 
 #Preview {
-  LandingView(authorizationStatus: .constant(.notDetermined))
+    LandingView(authorizationStatus: .constant(.notDetermined))
 }
