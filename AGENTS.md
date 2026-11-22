@@ -77,7 +77,24 @@ tap unparseable ("invalid") contacts to fix them directly in the native iOS Cont
     `+442079460958`) so formatting assertions are locale-independent.
   - Run tests on an iOS Simulator destination (test targets do not configure device signing teams).
 
-## 4. Feature Provenance & Living Documentation Rule (MANDATORY)
+## 4. Coding Style Guide (MANDATORY)
+
+All Swift code (production and tests) MUST follow [`docs/CODING_STYLE.md`](docs/CODING_STYLE.md).
+Key rules to pay special attention to:
+
+- Use **4-space indentation** across all Swift files.
+- **Explicit boolean returns:** Never use implicit returns for `Bool`-returning functions or
+  computed properties—always write `return`.
+- **No `!` negation on boolean returns:** Avoid `return !flag` or inline negated boolean returns;
+  use an explicit multi-line `if` / `else` returning `true` or `false`.
+- **No single-line `if` / `guard` statements:** Always place the body and closing `}` on separate
+  lines.
+- **Blank line after control structures:** Always leave a blank line after the closing `}` of `if`,
+  `guard`, `for`, `while`, `switch`, `do`/`catch`, `defer`, and `#if`/`#endif` blocks unless the
+  next line is a closing `}` or a branch continuation (`else`, `catch`, `case`).
+- **Avoid ternary operators (`? :`):** Prefer explicit multi-line `if` / `else` blocks.
+
+## 5. Feature Provenance & Living Documentation Rule (MANDATORY)
 
 Detailed feature behavior, user rationale, and implementation history live in `docs/FEATURES.md`.
 
