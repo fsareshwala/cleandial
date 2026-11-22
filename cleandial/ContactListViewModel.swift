@@ -32,18 +32,22 @@ final class ContactListViewModel {
     }
 
     func anyContactNeedsFormatting() -> Bool {
-        validContacts.contains { $0.needsFormatting(toFormat: selectedFormatType) }
+        return validContacts.contains { $0.needsFormatting(toFormat: selectedFormatType) }
     }
 
     func saveContacts() async {
-        guard anyContactNeedsFormatting() else { return }
+        guard anyContactNeedsFormatting() else {
+            return
+        }
 
         let formatType = selectedFormatType
         let contactsToFormat = validContacts.filter {
             $0.isChecked && $0.needsFormatting(toFormat: formatType)
         }
 
-        guard !contactsToFormat.isEmpty else { return }
+        guard !contactsToFormat.isEmpty else {
+            return
+        }
 
         await contactStore.saveFormattedContacts(contactsToFormat, toFormat: formatType)
 
@@ -52,9 +56,14 @@ final class ContactListViewModel {
     }
 
     func getContacts() async {
-        guard !isFetchingContacts else { return }
+        guard !isFetchingContacts else {
+            return
+        }
+
         isFetchingContacts = true
-        defer { isFetchingContacts = false }
+        defer {
+            isFetchingContacts = false
+        }
 
         switch contactStore.authorizationStatus() {
         case .authorized, .limited:

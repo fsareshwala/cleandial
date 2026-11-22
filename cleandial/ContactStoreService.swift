@@ -17,7 +17,7 @@ struct ContactStoreService: ContactStoreProviding {
     }
 
     func requestAccess() async throws -> Bool {
-        try await CNContactStore().requestAccess(for: .contacts)
+        return try await CNContactStore().requestAccess(for: .contacts)
     }
 
     func fetchContacts() -> AsyncStream<Contact> {

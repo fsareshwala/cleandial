@@ -44,7 +44,10 @@ struct Contact: Identifiable, @unchecked Sendable {
     }
 
     var phoneNumberLabel: String {
-        guard let label = devicePhoneNumber.label else { return "" }
+        guard let label = devicePhoneNumber.label else {
+            return ""
+        }
+
         return CNLabeledValue<CNPhoneNumber>.localizedString(forLabel: label)
     }
 
@@ -74,7 +77,11 @@ struct Contact: Identifiable, @unchecked Sendable {
     }
 
     var hasValidPhoneNumber: Bool {
-        parsedPhoneNumber != PhoneNumber.notPhoneNumber()
+        if parsedPhoneNumber == PhoneNumber.notPhoneNumber() {
+            return false
+        } else {
+            return true
+        }
     }
 
     func formattedPhoneNumberIfNeeded(for format: PhoneNumberFormat) -> String? {
@@ -83,11 +90,19 @@ struct Contact: Identifiable, @unchecked Sendable {
         }
 
         let formatted = formatPhoneNumber(format)
-        return phoneNumber == formatted ? nil : formatted
+        if phoneNumber == formatted {
+            return nil
+        } else {
+            return formatted
+        }
     }
 
     func needsFormatting(toFormat: PhoneNumberFormat) -> Bool {
-        formattedPhoneNumberIfNeeded(for: toFormat) != nil
+        if formattedPhoneNumberIfNeeded(for: toFormat) == nil {
+            return false
+        } else {
+            return true
+        }
     }
 
     func formatPhoneNumber(_ toFormat: PhoneNumberFormat) -> String {

@@ -76,9 +76,11 @@ private final class MockContactStore: ContactStoreProviding, @unchecked Sendable
                 if delay > 0 {
                     try? await Task.sleep(nanoseconds: delay)
                 }
+
                 for contact in contacts {
                     continuation.yield(contact)
                 }
+
                 continuation.finish()
             }
         }
@@ -405,7 +407,13 @@ struct ContactListViewModelTests {
         store.status = .authorized
         store.contactsToStream = (0..<totalContacts).map { index in
             let isValid = index.isMultiple(of: 2)
-            let number = isValid ? "+141555501\(String(format: "%02d", index))" : "bad-\(index)"
+            let number: String
+            if isValid {
+                number = "+141555501\(String(format: "%02d", index))"
+            } else {
+                number = "bad-\(index)"
+            }
+
             return makeContact(givenName: String(format: "User%02d", index), phoneNumber: number)
         }
 
@@ -551,7 +559,13 @@ struct ContactListViewModelTests {
         let store = MockContactStore()
         let analytics = MockAnalyticsLogger()
 
-        let rawNumber = format == .e164 ? "+1 415-555-0100" : "+14155550100"
+        let rawNumber: String
+        if format == .e164 {
+            rawNumber = "+1 415-555-0100"
+        } else {
+            rawNumber = "+14155550100"
+        }
+
         let viewModel = ContactListViewModel(
             contactStore: store,
             analytics: analytics,

@@ -39,11 +39,13 @@ struct AboutView: View {
                                         Label("Share Clean Dial", systemImage: "square.and.arrow.up")
                                     }
                                 }
+
                                 if let githubIssuesURL = AppLinks.githubIssues {
                                     Link(destination: githubIssuesURL) {
                                         Label("Report a Bug", systemImage: "exclamationmark.circle")
                                     }
                                 }
+
                                 if let githubURL = AppLinks.github {
                                     Link(destination: githubURL) {
                                         Label {

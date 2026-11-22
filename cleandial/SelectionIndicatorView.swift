@@ -4,8 +4,13 @@ struct SelectionIndicatorView: View {
     let isSelected: Bool
 
     var body: some View {
-        Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-            .foregroundStyle(isSelected ? .blue : .gray)
+        if isSelected {
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundStyle(.blue)
+        } else {
+            Image(systemName: "circle")
+                .foregroundStyle(.gray)
+        }
     }
 }
 
