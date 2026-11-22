@@ -26,8 +26,10 @@ tap unparseable ("invalid") contacts to fix them directly in the native iOS Cont
     number parsing and formatting.
   - `Firebase` (`FirebaseCore`, `FirebaseAnalytics`, `FirebaseCrashlytics`) for anonymous usage
     analytics and crash reporting.
-- **CI/CD:** `ci_scripts/ci_post_clone.sh` runs in Xcode Cloud to set `CURRENT_PROJECT_VERSION` from
-  `$CI_BUILD_NUMBER`.
+- **CI/CD:** `.github/workflows/release.yml` provides a manual `workflow_dispatch` release button
+  that bumps `MARKETING_VERSION` for the `cleandial` target, commits, creates an annotated `vX.Y.Z`
+  tag, and publishes a GitHub Release. Xcode Cloud builds/archives on `v*` tag pushes and manages
+  auto-incrementing build numbers automatically.
 
 ## 3. Core Architectural Invariants
 
