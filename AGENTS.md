@@ -61,38 +61,15 @@ tap unparseable ("invalid") contacts to fix them directly in the native iOS Cont
   - Keep all Firebase Analytics events strongly typed in `AnalyticsEvent` and logged through
     `AnalyticsLogging` (`FirebaseAnalyticsLogger.shared`). Do not scatter raw `Analytics.logEvent`
     string literals across views.
-- **Modern SwiftUI & Concurrency Conventions:**
-  - Use `@Observable` (Observation framework) rather than Combine's `ObservableObject`/`@Published`.
-  - Prefer Swift `async`/`await` APIs (e.g., `CNContactStore.requestAccess(for:)`) over completion
-    handlers to avoid background-thread SwiftUI state mutations.
-  - Use `@State private var` for local view state, `@Environment(\.openURL)` /
-    `@Environment(\.dismiss)` instead of `UIApplication.shared.open`, modern SwiftUI modifiers
-    (`.foregroundStyle`, `.clipShape`), and safe URL handling via `AppLinks` (no force unwrapping).
-  - Reuse shared UI primitives (`IconHeaderView`, `SelectionIndicatorView`, `MessageView`,
-    `ActionView`, `Sheet`) rather than duplicating layout code.
 - **Testing & Verification:**
   - Add/update Swift Testing unit tests in `cleandialTests/cleandialTests.swift` using
     mock `ContactStoreProviding` and `AnalyticsLogging` implementations.
-  - Use explicit international country codes in test phone numbers (e.g., `+14155550100`,
-    `+442079460958`) so formatting assertions are locale-independent.
   - Run tests on an iOS Simulator destination (test targets do not configure device signing teams).
 
 ## 4. Coding Style Guide (MANDATORY)
 
 All Swift code (production and tests) MUST follow [`docs/CODING_STYLE.md`](docs/CODING_STYLE.md).
-Key rules to pay special attention to:
-
-- Use **4-space indentation** across all Swift files.
-- **Explicit boolean returns:** Never use implicit returns for `Bool`-returning functions or
-  computed properties—always write `return`.
-- **No `!` negation on boolean returns:** Avoid `return !flag` or inline negated boolean returns;
-  use an explicit multi-line `if` / `else` returning `true` or `false`.
-- **No single-line `if` / `guard` statements:** Always place the body and closing `}` on separate
-  lines.
-- **Blank line after control structures:** Always leave a blank line after the closing `}` of `if`,
-  `guard`, `for`, `while`, `switch`, `do`/`catch`, `defer`, and `#if`/`#endif` blocks unless the
-  next line is a closing `}` or a branch continuation (`else`, `catch`, `case`).
-- **Avoid ternary operators (`? :`):** Prefer explicit multi-line `if` / `else` blocks.
+Read it before writing or editing any Swift code.
 
 ## 5. Feature Provenance & Living Documentation Rule (MANDATORY)
 

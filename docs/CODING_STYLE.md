@@ -7,11 +7,11 @@ All new code and edits—both human and AI-authored—must follow these conventi
 
 ## 1. Formatting & File Structure
 
-- **Indentation:** Use **4 spaces** per indentation level (no tabs).
+- **Indentation:** Use **2 spaces** per indentation level (no tabs).
 - **Imports:** List module imports alphabetically at the top of each file. In test files, separate
   `@testable import cleandial` from framework imports with a blank line.
 - **Line Wrapping:** Wrap long parameter lists, multi-argument calls, and multi-line collections
-  across lines with 4-space indentation and closing delimiters aligned with the opening statement.
+  across lines with 2-space indentation and closing delimiters aligned with the opening statement.
 - **Section Markers:** Use `// MARK: -` comments to group logical sections in longer files (e.g.,
   test suites and test helpers).
 - **Previews:** Place `#Preview` blocks at the bottom of SwiftUI view files.
@@ -31,11 +31,11 @@ guard let label = devicePhoneNumber.label else { return "" }
 
 // Prefer
 if isReady {
-    proceed()
+  proceed()
 }
 
 guard let label = devicePhoneNumber.label else {
-    return ""
+  return ""
 }
 ```
 
@@ -51,13 +51,13 @@ subsequent statements in the same scope.
 ```swift
 // Avoid
 guard !isFetchingContacts else {
-    return
+  return
 }
 isFetchingContacts = true
 
 // Prefer
 guard !isFetchingContacts else {
-    return
+  return
 }
 
 isFetchingContacts = true
@@ -66,20 +66,20 @@ isFetchingContacts = true
 ```swift
 // Avoid
 if delay > 0 {
-    try? await Task.sleep(nanoseconds: delay)
+  try? await Task.sleep(nanoseconds: delay)
 }
 for contact in contacts {
-    continuation.yield(contact)
+  continuation.yield(contact)
 }
 continuation.finish()
 
 // Prefer
 if delay > 0 {
-    try? await Task.sleep(nanoseconds: delay)
+  try? await Task.sleep(nanoseconds: delay)
 }
 
 for contact in contacts {
-    continuation.yield(contact)
+  continuation.yield(contact)
 }
 
 continuation.finish()
@@ -88,11 +88,11 @@ continuation.finish()
 ```swift
 // No blank line needed before closing braces of enclosing scopes
 for contact in batch {
-    if contact.hasValidPhoneNumber {
-        validContacts.append(contact)
-    } else {
-        invalidContacts.append(contact)
-    }
+  if contact.hasValidPhoneNumber {
+    validContacts.append(contact)
+  } else {
+    invalidContacts.append(contact)
+  }
 }
 ```
 
@@ -107,24 +107,24 @@ return phoneNumber == formatted ? nil : formatted
 
 // Prefer
 if phoneNumber == formatted {
-    return nil
+  return nil
 } else {
-    return formatted
+  return formatted
 }
 ```
 
 ```swift
 // Avoid
 Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-    .foregroundStyle(isSelected ? .blue : .gray)
+  .foregroundStyle(isSelected ? .blue : .gray)
 
 // Prefer
 if isSelected {
-    Image(systemName: "checkmark.circle.fill")
-        .foregroundStyle(.blue)
+  Image(systemName: "checkmark.circle.fill")
+    .foregroundStyle(.blue)
 } else {
-    Image(systemName: "circle")
-        .foregroundStyle(.gray)
+  Image(systemName: "circle")
+    .foregroundStyle(.gray)
 }
 ```
 
@@ -141,12 +141,12 @@ explicit `return` keyword.
 ```swift
 // Avoid
 func anyContactNeedsFormatting() -> Bool {
-    validContacts.contains { $0.needsFormatting(toFormat: selectedFormatType) }
+  validContacts.contains { $0.needsFormatting(toFormat: selectedFormatType) }
 }
 
 // Prefer
 func anyContactNeedsFormatting() -> Bool {
-    return validContacts.contains { $0.needsFormatting(toFormat: selectedFormatType) }
+  return validContacts.contains { $0.needsFormatting(toFormat: selectedFormatType) }
 }
 ```
 
@@ -158,32 +158,32 @@ inline). Write an explicit multi-line `if`/`else` returning `true` or `false`.
 ```swift
 // Avoid
 func isActive() -> Bool {
-    return !isDisabled
+  return !isDisabled
 }
 
 // Prefer
 func isActive() -> Bool {
-    if isDisabled {
-        return false
-    } else {
-        return true
-    }
+  if isDisabled {
+    return false
+  } else {
+    return true
+  }
 }
 ```
 
 ```swift
 // Avoid
 var hasValidPhoneNumber: Bool {
-    parsedPhoneNumber != PhoneNumber.notPhoneNumber()
+  parsedPhoneNumber != PhoneNumber.notPhoneNumber()
 }
 
 // Prefer
 var hasValidPhoneNumber: Bool {
-    if parsedPhoneNumber == PhoneNumber.notPhoneNumber() {
-        return false
-    } else {
-        return true
-    }
+  if parsedPhoneNumber == PhoneNumber.notPhoneNumber() {
+    return false
+  } else {
+    return true
+  }
 }
 ```
 
