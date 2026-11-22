@@ -156,18 +156,20 @@ implementation history behind it. AI agents must keep this file synchronized wit
 - **Key Files:** `cleandial/cleandialApp.swift`,
   `cleandial/AnalyticsService.swift`, `GoogleService-Info.plist`.
 
-### 8. Automated Release Versioning & Xcode Cloud Distribution
+### 8. Automated Release Versioning & App Store Connect Submission
 
-- **Behavior:** `.github/workflows/release.yml` provides a manual `workflow_dispatch` trigger on
-  the repository's default branch (`patch` / `minor` / `major`, optional `custom_version`, and
-  optional `dry_run`) that bumps `MARKETING_VERSION` for the `cleandial` app target in
-  `cleandial.xcodeproj/project.pbxproj`, commits the bump, creates an annotated `vX.Y.Z` Git tag,
-  and publishes a GitHub Release with auto-generated notes. Pushing the `v*` tag triggers Xcode
-  Cloud to archive and distribute the build while automatically managing monotonically increasing
-  build numbers.
-- **Provenance & Rationale:** Replaces the manual release process and the redundant
-  `ci_scripts/ci_post_clone.sh` script (`a648654`) so every shipped version maps cleanly to an
-  immutable Git tag/commit, normal pushes to the default branch don't trigger closed-train App Store
-  Connect rejections (`ITMS-90186` / `ITMS-90062`), and Xcode Cloud handles build numbering natively.
-- **Key Files:** `.github/workflows/release.yml`, `cleandial.xcodeproj/project.pbxproj`,
+- **Behavior:** `.github/workflows/release.yml` (backed by `.github/scripts/asc_release.py`)
+  provides a one-click `workflow_dispatch` trigger on the repository's default branch (`patch` /
+  `minor` / `major`, optional `whats_new`, optional `custom_version`, and optional `dry_run`).
+  After validating App Store Connect API credentials (`ASC_ISSUER_ID`, `ASC_KEY_ID`,
+  `ASC_PRIVATE_KEY`), it bumps `MARKETING_VERSION` for `cleandial`, commits, tags `vX.Y.Z`,
+  publishes a GitHub Release, creates/updates the matching iOS App Store Connect version and What's
+  New notes, polls until the tag-triggered Xcode Cloud build finishes processing (`VALID`),
+  attaches the build, and submits the version for App Review.
+- **Provenance & Rationale:** Eliminates manual version creation, build attachment, and review
+  submission in App Store Connect while mapping every shipped version to an immutable Git tag and
+  commit, preventing closed-train rejections (`ITMS-90186` / `ITMS-90062`), and letting Xcode Cloud
+  handle build numbering natively.
+- **Key Files:** `.github/workflows/release.yml`, `.github/scripts/asc_release.py`,
+  `cleandial.xcodeproj/project.pbxproj`,
   `cleandial.xcodeproj/xcshareddata/xcodecloud/manifest.json`.
