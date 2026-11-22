@@ -28,7 +28,7 @@ tap unparseable ("invalid") contacts to fix them directly in the native iOS Cont
     analytics and crash reporting.
 - **CI/CD:** `.github/workflows/release.yml` + `.github/scripts/asc_release.py` provide a manual
   `workflow_dispatch` release button that bumps `MARKETING_VERSION` for the `cleandial` target,
-  commits, tags `vX.Y.Z`, publishes a GitHub Release, creates the matching App Store Connect
+  commits, tags `ios/vX.Y.Z`, publishes a GitHub Release, creates the matching App Store Connect
   version, waits for the Xcode Cloud build to finish processing, attaches it, and submits for App
   Review (requires `ASC_ISSUER_ID`, `ASC_KEY_ID`, and `ASC_PRIVATE_KEY` GitHub Secrets).
 

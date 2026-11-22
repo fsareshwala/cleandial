@@ -162,7 +162,7 @@ implementation history behind it. AI agents must keep this file synchronized wit
   provides a one-click `workflow_dispatch` trigger on the repository's default branch (`patch` /
   `minor` / `major`, optional `whats_new`, optional `custom_version`, and optional `dry_run`).
   After validating App Store Connect API credentials (`ASC_ISSUER_ID`, `ASC_KEY_ID`,
-  `ASC_PRIVATE_KEY`), it bumps `MARKETING_VERSION` for `cleandial`, commits, tags `vX.Y.Z`,
+  `ASC_PRIVATE_KEY`), it bumps `MARKETING_VERSION` for `cleandial`, commits, tags `ios/vX.Y.Z`,
   publishes a GitHub Release, creates/updates the matching iOS App Store Connect version and What's
   New notes, polls until the tag-triggered Xcode Cloud build finishes processing (`VALID`),
   attaches the build, and submits the version for App Review.
