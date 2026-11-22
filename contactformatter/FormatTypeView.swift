@@ -1,37 +1,22 @@
-import FirebaseAnalytics
 import PhoneNumberKit
 import SwiftUI
 
-struct FormatTypeOption: Identifiable {
-  let id = UUID()
-  let formatType: PhoneNumberFormat
-  let label: String
-}
-
 struct FormatTypeList: View {
-  private let formatTypes: [(FormatTypeOption)] = [
-    FormatTypeOption(formatType: .international, label: "International"),
-    FormatTypeOption(formatType: .national, label: "National"),
-    FormatTypeOption(formatType: .e164, label: "e.164"),
-  ]
+    @Binding var selectedFormatType: PhoneNumberFormat
 
-  @Binding var selectedFormatType: PhoneNumberFormat
+    var body: some View {
+        ForEach(PhoneNumberFormat.allOptions, id: \.self) { formatType in
+            HStack {
+                Button(action: {
+                    selectedFormatType = formatType
+                    FirebaseAnalyticsLogger.shared.log(.formatTypeSelected(formatType))
+                }) {
+                    SelectionIndicatorView(isSelected: selectedFormatType == formatType)
+                }
 
-  var body: some View {
-    ForEach(formatTypes) { item in
-      HStack {
-        Button(action: {
-          selectedFormatType = item.formatType
-          Analytics.logEvent("format_type_selected", parameters: ["type": item.label])
-        }) {
-          let selected = (selectedFormatType == item.formatType)
-          Image(systemName: selected ? "checkmark.circle.fill" : "circle")
-            .foregroundColor(selected ? .blue : .gray)
+                Text(formatType.displayName)
+                    .font(.callout)
+            }
         }
-
-        Text(item.label)
-          .font(.callout)
-      }
     }
-  }
 }
