@@ -7,7 +7,7 @@ enum Util {
 }
 
 enum AppLinks {
-    static let githubURLString = "https://github.com/fsareshwala/contactformatter"
+    static let githubURLString = "https://github.com/fsareshwala/cleandial"
     static let appStoreURLString = "https://apps.apple.com/us/app/clean-dial/id6745625133"
 
     static var github: URL? {

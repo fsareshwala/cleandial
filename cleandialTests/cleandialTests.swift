@@ -638,10 +638,10 @@ struct SupportingTypesTests {
     }
 
     @Test func appLinksProduceValidURLs() {
-        #expect(AppLinks.github?.absoluteString == "https://github.com/fsareshwala/contactformatter")
+        #expect(AppLinks.github?.absoluteString == "https://github.com/fsareshwala/cleandial")
         #expect(
             AppLinks.githubIssues?.absoluteString
-                == "https://github.com/fsareshwala/contactformatter/issues"
+                == "https://github.com/fsareshwala/cleandial/issues"
         )
         #expect(
             AppLinks.appStore?.absoluteString
