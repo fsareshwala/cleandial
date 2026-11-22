@@ -18,6 +18,6 @@ cd "$CI_PRIMARY_REPOSITORY_PATH"
 
 # Update all instances of CURRENT_PROJECT_VERSION in the project file
 # Ensure the .xcodeproj name matches exactly
-sed -i '' "s/CURRENT_PROJECT_VERSION = .*;/CURRENT_PROJECT_VERSION = $CI_BUILD_NUMBER;/g" contactformatter.xcodeproj/project.pbxproj
+sed -i '' "s/CURRENT_PROJECT_VERSION = .*;/CURRENT_PROJECT_VERSION = $CI_BUILD_NUMBER;/g" cleandial.xcodeproj/project.pbxproj
 
 echo "Successfully updated build number to $CI_BUILD_NUMBER"
