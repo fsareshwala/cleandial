@@ -35,10 +35,12 @@ jobs:
     name: Bump version, tag, and publish release
     runs-on: ubuntu-latest
     steps:
-      - name: Ensure release runs from main
-        if: github.ref != 'refs/heads/main'
+      - name: Ensure release runs from default branch
+        if: github.ref_name != github.event.repository.default_branch
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
-          echo "::error::Releases must be triggered from the main branch (got ${GITHUB_REF})."
+          echo "::error::Releases must be triggered from the ${DEFAULT_BRANCH} branch (got ${GITHUB_REF_NAME})."
           exit 1
 
       - name: Checkout repository
@@ -176,6 +178,7 @@ jobs:
         env:
           NEW_VERSION: ${{ steps.version.outputs.new_version }}
           TAG: ${{ steps.version.outputs.tag }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -184,7 +187,7 @@ jobs:
           git commit -m "chore(release): ${TAG}"
           git tag -a "${TAG}" -m "Release ${TAG}"
 
-          git push origin HEAD:main
+          git push origin "HEAD:${DEFAULT_BRANCH}"
           git push origin "${TAG}"
 
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"

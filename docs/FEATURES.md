@@ -159,14 +159,15 @@ implementation history behind it. AI agents must keep this file synchronized wit
 ### 8. Automated Release Versioning & Xcode Cloud Distribution
 
 - **Behavior:** `.github/workflows/release.yml` provides a manual `workflow_dispatch` trigger on
-  `main` (`patch` / `minor` / `major`, optional `custom_version`, and optional `dry_run`) that
-  bumps `MARKETING_VERSION` for the `cleandial` app target in `cleandial.xcodeproj/project.pbxproj`,
-  commits the bump, creates an annotated `vX.Y.Z` Git tag, and publishes a GitHub Release with
-  auto-generated notes. Pushing the `v*` tag triggers Xcode Cloud to archive and distribute the
-  build while automatically managing monotonically increasing build numbers.
+  the repository's default branch (`patch` / `minor` / `major`, optional `custom_version`, and
+  optional `dry_run`) that bumps `MARKETING_VERSION` for the `cleandial` app target in
+  `cleandial.xcodeproj/project.pbxproj`, commits the bump, creates an annotated `vX.Y.Z` Git tag,
+  and publishes a GitHub Release with auto-generated notes. Pushing the `v*` tag triggers Xcode
+  Cloud to archive and distribute the build while automatically managing monotonically increasing
+  build numbers.
 - **Provenance & Rationale:** Replaces the manual release process and the redundant
   `ci_scripts/ci_post_clone.sh` script (`a648654`) so every shipped version maps cleanly to an
-  immutable Git tag/commit, normal pushes to `main` don't trigger closed-train App Store Connect
-  rejections (`ITMS-90186` / `ITMS-90062`), and Xcode Cloud handles build numbering natively.
+  immutable Git tag/commit, normal pushes to the default branch don't trigger closed-train App Store
+  Connect rejections (`ITMS-90186` / `ITMS-90062`), and Xcode Cloud handles build numbering natively.
 - **Key Files:** `.github/workflows/release.yml`, `cleandial.xcodeproj/project.pbxproj`,
   `cleandial.xcodeproj/xcshareddata/xcodecloud/manifest.json`.
