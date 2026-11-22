@@ -26,10 +26,10 @@ implementation history behind it. AI agents must keep this file synchronized wit
   understand *why* Clean Dial requests Contacts access and that their contacts never leave the
   device before seeing the system permission prompt. The CTA wording was updated from "Grant
   Access" to "Continue" (`e654810`) to align with standard iOS onboarding conventions.
-- **Key Files:** `contactformatter/MainView.swift`, `contactformatter/LandingView.swift`,
-  `contactformatter/ActionView.swift`, `contactformatter/MessageView.swift`,
-  `contactformatter/LogoHeaderView.swift`, `contactformatter/IconHeaderView.swift`,
-  `contactformatter/ContactStoreService.swift`.
+- **Key Files:** `cleandial/MainView.swift`, `cleandial/LandingView.swift`,
+  `cleandial/ActionView.swift`, `cleandial/MessageView.swift`,
+  `cleandial/LogoHeaderView.swift`, `cleandial/IconHeaderView.swift`,
+  `cleandial/ContactStoreService.swift`.
 
 ### 2. Standard Phone Number Format Selection
 
@@ -44,8 +44,8 @@ implementation history behind it. AI agents must keep this file synchronized wit
   `PhoneNumberKit` (`PhoneNumberFormat`). Format examples were intentionally removed from the
   option rows (`84d520d`) to keep the format picker compact and uncluttered while the live contact
   list underneath previews the actual formatted output.
-- **Key Files:** `contactformatter/FormatTypeView.swift`, `contactformatter/Contact.swift`,
-  `contactformatter/SelectionIndicatorView.swift`, `contactformatter/ContactListViewModel.swift`.
+- **Key Files:** `cleandial/FormatTypeView.swift`, `cleandial/Contact.swift`,
+  `cleandial/SelectionIndicatorView.swift`, `cleandial/ContactListViewModel.swift`.
 
 ### 3. Streaming Contact Enumeration, Partitioning & Auto-Refresh
 
@@ -70,9 +70,9 @@ implementation history behind it. AI agents must keep this file synchronized wit
     and `.refreshable` triggered `getContacts()` concurrently.
   - **Auto-reload on foreground (`c9f690b`) & pull-to-refresh (`5f8ee5c`):** Keeps the list fresh
     when users edit contacts in the Contacts app or in `ContactDetailView`.
-- **Key Files:** `contactformatter/ContactStoreService.swift`,
-  `contactformatter/ContactListViewModel.swift`, `contactformatter/Contact.swift`,
-  `contactformatter/ContactListView.swift`.
+- **Key Files:** `cleandial/ContactStoreService.swift`,
+  `cleandial/ContactListViewModel.swift`, `cleandial/Contact.swift`,
+  `cleandial/ContactListView.swift`.
 
 ### 4. Contact Preview, Selective Checkboxes & Batch Formatting Save
 
@@ -97,9 +97,9 @@ implementation history behind it. AI agents must keep this file synchronized wit
   - Hiding the bottom toolbar button and skipping saves when nothing needs formatting (`244d1e7`,
     `af81d60`, `ba52651`) prevents accidental no-op writes; the overlay (`20f9d71`, `f5c893c`)
     provides clear feedback during large saves.
-- **Key Files:** `contactformatter/ContactListView.swift`, `contactformatter/ContactView.swift`,
-  `contactformatter/SelectionIndicatorView.swift`, `contactformatter/Contact.swift`,
-  `contactformatter/ContactListViewModel.swift`, `contactformatter/ContactStoreService.swift`.
+- **Key Files:** `cleandial/ContactListView.swift`, `cleandial/ContactView.swift`,
+  `cleandial/SelectionIndicatorView.swift`, `cleandial/Contact.swift`,
+  `cleandial/ContactListViewModel.swift`, `cleandial/ContactStoreService.swift`.
 
 ### 5. Invalid Contacts Section, Info Sheet & In-App Editing
 
@@ -117,9 +117,9 @@ implementation history behind it. AI agents must keep this file synchronized wit
   `.medium` info sheet (`bee180c`, `281f844`), phone number label display (`7b83f6d`), and tap-to-edit
   `CNContactViewController` (`7ac8b4d`) turned dead-end warnings into an actionable in-app repair
   workflow.
-- **Key Files:** `contactformatter/ContactListView.swift`, `contactformatter/ContactView.swift`,
-  `contactformatter/InvalidContactsInfoView.swift`, `contactformatter/WarningHeaderView.swift`,
-  `contactformatter/ContactDetailView.swift`, `contactformatter/Sheet.swift`.
+- **Key Files:** `cleandial/ContactListView.swift`, `cleandial/ContactView.swift`,
+  `cleandial/InvalidContactsInfoView.swift`, `cleandial/WarningHeaderView.swift`,
+  `cleandial/ContactDetailView.swift`, `cleandial/Sheet.swift`.
 
 ### 6. About Sheet, Privacy Policy & Other Apps
 
@@ -136,9 +136,9 @@ implementation history behind it. AI agents must keep this file synchronized wit
   transparency and privacy documentation (`cfa83b4`, `d1240b4`), bug reporting, App Store sharing,
   and cross-app discovery (`785b331`) in a clean modal sheet managed through the unified `Sheet`
   enum (`aee3496`).
-- **Key Files:** `contactformatter/AboutView.swift`, `contactformatter/PrivacyPolicyView.swift`,
-  `contactformatter/OtherAppsView.swift`, `contactformatter/Util.swift`,
-  `contactformatter/Sheet.swift`.
+- **Key Files:** `cleandial/AboutView.swift`, `cleandial/PrivacyPolicyView.swift`,
+  `cleandial/OtherAppsView.swift`, `cleandial/Util.swift`,
+  `cleandial/Sheet.swift`.
 
 ### 7. Anonymous Usage Analytics & Crash Reporting
 
@@ -153,13 +153,13 @@ implementation history behind it. AI agents must keep this file synchronized wit
   collecting contact data. Disabling analytics in `DEBUG` (`f81a0c7`) keeps development sessions
   out of production metrics, and centralizing events behind `AnalyticsEvent` / `AnalyticsLogging`
   (`aaa7816`) prevents schema drift and enables unit test verification.
-- **Key Files:** `contactformatter/contactformatterApp.swift`,
-  `contactformatter/AnalyticsService.swift`, `GoogleService-Info.plist`.
+- **Key Files:** `cleandial/cleandialApp.swift`,
+  `cleandial/AnalyticsService.swift`, `GoogleService-Info.plist`.
 
 ### 8. Automated Xcode Cloud Build Versioning
 
 - **Behavior:** `ci_scripts/ci_post_clone.sh` replaces `CURRENT_PROJECT_VERSION` in
-  `contactformatter.xcodeproj/project.pbxproj` with Xcode Cloud's `$CI_BUILD_NUMBER` whenever
+  `cleandial.xcodeproj/project.pbxproj` with Xcode Cloud's `$CI_BUILD_NUMBER` whenever
   present.
 - **Provenance & Rationale:** Eliminates manual build-number bumps for TestFlight and App Store
   uploads (`a648654`).

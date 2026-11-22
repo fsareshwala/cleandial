@@ -2,7 +2,7 @@
 
 ## 1. Product Vision & User Intent
 
-**Clean Dial** (`contactformatter`) is a focused, privacy-first, open-source iOS utility (inspired
+**Clean Dial** (`cleandial`) is a focused, privacy-first, open-source iOS utility (inspired
 by Android's Twitch 2) that lets users batch-format phone numbers in their iOS Contacts address book
 into a consistent standard format—**International**, **National**, or **e.164**—entirely on-device.
 Users preview every before/after change, can uncheck individual numbers they want to skip, and can
@@ -11,15 +11,15 @@ tap unparseable ("invalid") contacts to fix them directly in the native iOS Cont
 ## 2. Project Identifiers, Targets & Dependencies
 
 - **App Display Name:** Clean Dial
-- **Xcode Project & Scheme:** `contactformatter` (`contactformatter.xcodeproj`)
-- **App Target & Bundle ID:** `contactformatter` (`com.fsareshwala.contactformatter`)
+- **Xcode Project & Scheme:** `cleandial` (`cleandial.xcodeproj`)
+- **App Target & Bundle ID:** `cleandial` (`com.fsareshwala.contactformatter`)
   - **Minimum Deployment Target:** iOS 17.6 (iPhone & iPad)
   - **File Organization:** Uses Xcode's `PBXFileSystemSynchronizedRootGroup`; files placed in
-    `contactformatter/` are automatically included in the app target.
-- **Unit Test Target & Bundle ID:** `contactformatterTests`
+    `cleandial/` are automatically included in the app target.
+- **Unit Test Target & Bundle ID:** `cleandialTests`
   (`com.fsareshwala.contactformatterTests`) — uses the **Swift Testing** framework
   (`import Testing`).
-- **UI Test Target & Bundle ID:** `contactformatterUITests`
+- **UI Test Target & Bundle ID:** `cleandialUITests`
   (`com.fsareshwala.contactformatterUITests`) — uses **XCTest / XCUIAutomation**.
 - **Swift Package Dependencies:**
   - `PhoneNumberKit` (`PhoneNumberUtility`, `PhoneNumberFormat`, `PhoneNumber`) for local phone
@@ -35,7 +35,7 @@ tap unparseable ("invalid") contacts to fix them directly in the native iOS Cont
   happens exclusively on-device via `Contacts.framework`. Never upload, persist externally, or
   attach personal contact data (names, phone numbers, labels) to analytics events or crash logs.
   Firebase Analytics collection is explicitly disabled under `#if DEBUG` in
-  `contactformatterApp.swift`.
+  `cleandialApp.swift`.
 - **Contacts Framework Required Key Descriptors:** `ContactStoreService.fetchContacts()` MUST always
   include:
   - `CNContactTypeKey`
@@ -71,7 +71,7 @@ tap unparseable ("invalid") contacts to fix them directly in the native iOS Cont
   - Reuse shared UI primitives (`IconHeaderView`, `SelectionIndicatorView`, `MessageView`,
     `ActionView`, `Sheet`) rather than duplicating layout code.
 - **Testing & Verification:**
-  - Add/update Swift Testing unit tests in `contactformatterTests/contactformatterTests.swift` using
+  - Add/update Swift Testing unit tests in `cleandialTests/cleandialTests.swift` using
     mock `ContactStoreProviding` and `AnalyticsLogging` implementations.
   - Use explicit international country codes in test phone numbers (e.g., `+14155550100`,
     `+442079460958`) so formatting assertions are locale-independent.

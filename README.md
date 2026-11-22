@@ -1,4 +1,4 @@
-# Contact Phone Number Formatter (iOS)
+# Clean Dial (iOS)
 
 [![iOS](https://img.shields.io/badge/iOS-17.0+-blue.svg)](https://developer.apple.com/ios/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
