@@ -1,22 +1,16 @@
 import SwiftUI
 
 struct WarningHeaderView: View {
-  var body: some View {
-    VStack {
-      Image(systemName: "exclamationmark.triangle")
-        .resizable()
-        .foregroundStyle(.yellow)
-        .scaledToFit()
-        .frame(width: 85, height: 85)
-
-      Text("Warning")
-        .font(.largeTitle)
-        .bold()
-        .padding()
+    var body: some View {
+        IconHeaderView(
+            systemImage: "exclamationmark.triangle",
+            title: "Warning",
+            tintColor: .yellow,
+            titlePaddingEdges: .all
+        )
     }
-  }
 }
 
 #Preview {
-  WarningHeaderView()
+    WarningHeaderView()
 }
