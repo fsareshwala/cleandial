@@ -56,11 +56,13 @@ struct ContactStoreService: ContactStoreProviding {
       let store = CNContactStore()
       for contact in contacts {
         let formatted = contact.formatPhoneNumber(format)
-        guard let mutableContact = Self.makeUpdatedContact(
-          from: contact.deviceContact,
-          replacing: contact.devicePhoneNumber,
-          with: formatted
-        ) else {
+        guard
+          let mutableContact = Self.makeUpdatedContact(
+            from: contact.deviceContact,
+            replacing: contact.devicePhoneNumber,
+            with: formatted
+          )
+        else {
           continue
         }
 
