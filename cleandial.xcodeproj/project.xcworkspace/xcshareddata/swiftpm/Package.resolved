@@ -1,5 +1,5 @@
 {
-  "originHash" : "cc8bc1f8e21ccc699162f465a0410424082898934327aa46fbdcc8074f1976c2",
+  "originHash" : "f2601af929785f0e697ef40509d66b46f5cfa7a6db2a626706ab68ae537f6184",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -89,6 +89,15 @@
       "state" : {
         "revision" : "040d087ac2267d2ddd4cca36c757d1c6a05fdbfe",
         "version" : "101.0.0"
+      }
+    },
+    {
+      "identity" : "ios-shared",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fsareshwala/ios-shared.git",
+      "state" : {
+        "revision" : "51680fccb3acb8f0a7380b1dc4a721f00e949934",
+        "version" : "1.0.0"
       }
     },
     {

@@ -1,3 +1,4 @@
+import OtherApps
 import SwiftUI
 
 struct AboutView: View {
@@ -65,7 +66,9 @@ struct AboutView: View {
             }
 
             Section(header: Text("Other Apps from the Developer")) {
-              OtherAppsView()
+              OtherAppsView { app in
+                FirebaseAnalyticsLogger.shared.log(.tapOtherApp(name: app.appName))
+              }
             }
           }
         }

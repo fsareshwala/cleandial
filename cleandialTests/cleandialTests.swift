@@ -1,6 +1,7 @@
 import Contacts
 import FirebaseAnalytics
 import Foundation
+import OtherApps
 import PhoneNumberKit
 import Testing
 
@@ -663,10 +664,15 @@ struct SupportingTypesTests {
     )
   }
 
-  @Test func appInfoForecashHasValidMetadata() {
-    #expect(AppInfo.forecash.id == "Forecash")
+  @Test func otherAppsExcludesCleanDialAndIncludesForecash() {
+    let otherApps = DeveloperAppsCatalog.otherApps(
+      excluding: DeveloperAppInfo.cleanDial.bundleIdentifier
+    )
+    #expect(otherApps.contains(.forecash))
+    #expect(!otherApps.contains(.cleanDial))
+    #expect(DeveloperAppInfo.forecash.iconUIImage != nil)
     #expect(
-      AppInfo.forecash.appStoreURL?.absoluteString
+      DeveloperAppInfo.forecash.appStoreURL?.absoluteString
         == "https://apps.apple.com/us/app/forecash-bill-planner/id6747775439"
     )
   }

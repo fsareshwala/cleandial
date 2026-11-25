@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB1055A32F000003001055A3 /* OtherApps in Frameworks */ = {isa = PBXBuildFile; productRef = BB1055A22F000002001055A2 /* OtherApps */; };
 		BB86A1FB2EBDBE5300AC6458 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BB86A1FA2EBDBE5300AC6458 /* FirebaseCrashlytics */; };
 		BB9924662DEACA8C002B7BCF /* PhoneNumberKit-Static in Frameworks */ = {isa = PBXBuildFile; productRef = BB9924652DEACA8C002B7BCF /* PhoneNumberKit-Static */; };
 		BBAB2B472DF767A300D5E1F8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBAB2B462DF767A300D5E1F8 /* GoogleService-Info.plist */; };
@@ -80,6 +81,7 @@
 				BB86A1FB2EBDBE5300AC6458 /* FirebaseCrashlytics in Frameworks */,
 				BBAB2B4C2DF7685400D5E1F8 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				BB9924662DEACA8C002B7BCF /* PhoneNumberKit-Static in Frameworks */,
+				BB1055A32F000003001055A3 /* OtherApps in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +156,7 @@
 				BB9924652DEACA8C002B7BCF /* PhoneNumberKit-Static */,
 				BBAB2B4B2DF7685400D5E1F8 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				BB86A1FA2EBDBE5300AC6458 /* FirebaseCrashlytics */,
+				BB1055A22F000002001055A2 /* OtherApps */,
 			);
 			productName = cleandial;
 			productReference = BBE983422DB7FA43004685CF /* cleandial.app */;
@@ -240,6 +243,7 @@
 			packageReferences = (
 				BB9924642DEACA8C002B7BCF /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
 				BBAB2B4A2DF7685400D5E1F8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BB1055A12F000001001055A1 /* XCRemoteSwiftPackageReference "ios-shared" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BBE983432DB7FA43004685CF /* Products */;
@@ -671,6 +675,14 @@
 				minimumVersion = 11.14.0;
 			};
 		};
+		BB1055A12F000001001055A1 /* XCRemoteSwiftPackageReference "ios-shared" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fsareshwala/ios-shared.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -692,6 +704,11 @@
 		BBC3992A2DD151670005BDD5 /* PhoneNumberKit-Static */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = "PhoneNumberKit-Static";
+		};
+		BB1055A22F000002001055A2 /* OtherApps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB1055A12F000001001055A1 /* XCRemoteSwiftPackageReference "ios-shared" */;
+			productName = OtherApps;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
